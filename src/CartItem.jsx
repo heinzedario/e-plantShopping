@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
+import ProductList from "./ProductList" ;
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
+    const [showProductList, setShowProductList] = useState(false);
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const cart = useSelector(state => state.cart.items);
@@ -21,8 +23,8 @@ const CartItem = ({ onContinueShopping }) => {
 
     const handleContinueShopping = (e) => {
         e.preventDefault();
-        setShowPlants(false); 
-        setShowCart(true); 
+        setShowCart(false);
+        setShowProductList(true);
     };
 
     const handleCheckoutShopping = (e) => {
