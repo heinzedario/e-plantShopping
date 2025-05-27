@@ -17,9 +17,11 @@ const calculateTotalAmount = () => {
     return total ;
 };
 
-  const handleContinueShopping = (e) => {
-   
-  };
+    const handleContinueShopping = (e) => {
+        e.preventDefault();
+        setShowPlants(true); 
+        setShowCart(false); 
+    };
 
     const handleCheckoutShopping = (e) => {
         alert('Functionality to be added for future reference');
@@ -39,8 +41,10 @@ const calculateTotalAmount = () => {
     };
 
   // Calculate total cost based on quantity for an item
-  const calculateTotalCost = (item) => {
-  };
+    const calculateTotalCost = (item) => {
+        const {cost, quantity} = item ;
+        return parseFloat(cost.substring(1)) * quantity
+    };
 
   return (
     <div className="cart-container">
