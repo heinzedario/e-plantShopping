@@ -1,26 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
+    const [showCart, setShowCart] = useState(false);
+    const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
   // Calculate total amount for all products in the cart
-const calculateTotalAmount = () => {
-    let total = 0 ;
-    cart.forEach((item) => {
-        const {cost, quantity} = item ;
-        total += parseFloat(cost.substring(1)) * quantity ;
-    });
-    return total ;
-};
+    const calculateTotalAmount = () => {
+        let total = 0 ;
+        cart.forEach((item) => {
+            const {cost, quantity} = item ;
+            total += parseFloat(cost.substring(1)) * quantity ;
+        });
+        return total ;
+    };
 
     const handleContinueShopping = (e) => {
         e.preventDefault();
-        setShowPlants(true); 
-        setShowCart(false); 
+        setShowPlants(false); 
+        setShowCart(true); 
     };
 
     const handleCheckoutShopping = (e) => {
@@ -37,7 +39,7 @@ const calculateTotalAmount = () => {
     };
 
     const handleRemove = (item) => {
-        dispatch(removeItem(item)) ;
+        dispatch(removeItem(item.name)) ;
     };
 
   // Calculate total cost based on quantity for an item
